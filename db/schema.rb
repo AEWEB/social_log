@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804103351) do
+ActiveRecord::Schema.define(:version => 20130923123640) do
+
+  create_table "categories", :force => true do |t|
+    t.string  "name",        :null => false
+    t.integer "category_id"
+    t.integer "user_id",     :null => false
+  end
+
+  add_index "categories", ["category_id"], :name => "categories_category_id_fk"
+  add_index "categories", ["user_id"], :name => "categories_user_id_fk"
 
   create_table "problems", :force => true do |t|
     t.string   "name",       :null => false
@@ -23,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20130804103351) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "so_categories", :force => true do |t|
+    t.string  "so_name",        :null => false
+    t.integer "so_category_id"
+  end
+
+  add_index "so_categories", ["so_category_id"], :name => "so_categories_so_category_id_fk"
 
   create_table "titles", :force => true do |t|
     t.string   "name"
@@ -42,5 +58,10 @@ ActiveRecord::Schema.define(:version => 20130804103351) do
     t.string   "token"
     t.string   "secret"
   end
+
+  add_foreign_key "categories", "categories", name: "categories_category_id_fk", dependent: :delete
+  add_foreign_key "categories", "users", name: "categories_user_id_fk", dependent: :delete
+
+  add_foreign_key "so_categories", "so_categories", name: "so_categories_so_category_id_fk", dependent: :delete
 
 end

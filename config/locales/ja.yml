@@ -2,4 +2,7 @@ ja:
   session:
     success: "ログインしました。"
     title: "Social Log"
-    
+  category:
+    output: "カテゴリー"
+    name: "カテゴリー名"
+    home: "ホーム"

@@ -1,0 +1,19 @@
+<div id="home" data-role="page">
+	<div data-role="header">
+		<h1><%=@category.name%></h1>
+	</div>
+	<div data-role="content">
+		<ul>
+			<%  @categories.each do |c| -%>
+  			<li><%= link_to c.name, "/categories/init/"+c.id.to_s %></li>
+			<% end -%>
+		</ul>
+		<div data-role="navbar" data-iconpos="left" >
+			<ul>
+	 			<li><%= link_to @category.name+"に"+t("category.output")+"を作成", "/categories/new/"+@category.id.to_s %></li>
+	 			<li><a >タイムラインを取得</a></li>
+			</ul>
+		</div>
+	</div>
+	<%= render 'shared/footer' %>
+</div>

@@ -2,10 +2,15 @@ SocialLog::Application.routes.draw do
   get "top/index"
 
   root :to => "top#index"
-
+  #resources :categories, :only => [:create]
   #OmniAuth
   match "/auth/:provider/callback" => "sessions#callback"
   match "/logout" => "sessions#destroy", :as => :logout
+  match "/categories/new/:category_id" => "Categories#new"
+  match "/categories" => "Categories#index"
+  post "categories/create"
+  get "categories/index"
+  match "/categories/init/:category_id" => "Categories#init"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

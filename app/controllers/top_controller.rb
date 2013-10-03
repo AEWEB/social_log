@@ -1,9 +1,7 @@
 class TopController < ApplicationController
   def index
     if current_user
-      #@list=@current_user.client.home_timeline
-      #raise @list.to_yaml
-      render :action => "login"
+      redirect_to :controller =>"categories"
     end
   end
 end

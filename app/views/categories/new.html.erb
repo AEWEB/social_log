@@ -1,0 +1,21 @@
+<div id="home" data-role="page">
+	<div data-role="header">
+		<h1><%= t("category.output") %>作成</h1>
+	</div>
+	<div data-role="content">
+		<p><%= @parentCategory.name %>に<%= t("category.output") %>を作成します。</p>
+		<%= form_for @category, :url => {:action => 'create'} do |f| %>
+		<%  if @category.errors.any? %>
+    		<% @category.errors.full_messages.each do |msg| %>
+     			 <li><%= msg %></li>
+    		<% end %>
+		<% end %>
+		
+		<%= f.label :name,t("category.name") %>
+		<%= f.text_field :name, "data-clear-btn" => "false" %>
+		<%= f.hidden_field :category_id, :value => @parentCategory.id %>
+		<%= f.submit "作成","data-mini" => "true", "data-inline" => "true" %>
+		<% end %>
+	</div>
+	<%= render 'shared/footer' %>
+</div>

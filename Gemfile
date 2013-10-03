@@ -15,7 +15,7 @@ gem 'twitter'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-
+gem 'foreigner'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
        redirect_to root_url
     else
        # Userモデルに:providerと:uidが無い場合（外部認証していない）、保存してからルートへ遷移させる
-       User.create_with_omniauth(auth)
+       user=User.create_with_omniauth(auth)
+       session[:user_id] = user.id
        redirect_to root_url
     end 
   end
