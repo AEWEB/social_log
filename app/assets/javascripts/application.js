@@ -86,7 +86,7 @@ var TwitterAccess=function(){
 			$("#"+this.getElementName()).append(data);
 			this.append=false;
 		}else if(this.redirect){
-			location.href="http://localhost:3000/"+data;
+			location.href="http://sociallog.herokuapp.com/"+data;
 		}else{
 			$("#"+this.getElementName()).html(data);
 		}
