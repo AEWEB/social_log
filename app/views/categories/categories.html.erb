@@ -4,16 +4,37 @@
 	</div>
 	<div data-role="content">
 		<ul>
+			<% if @category.id!=-1 -%>
+				<li><%=link_to "戻る","/categories/init/"+@category.category_id.to_s %></li>
+			<% end -%>	
 			<%  @categories.each do |c| -%>
   			<li><%= link_to c.name, "/categories/init/"+c.id.to_s %></li>
 			<% end -%>
 		</ul>
+		<div>
+		<%  @stateList.each do |c| -%>
+			<ul data-role="listview" data-inset="true" data-divider-theme="e">
+				<li data-role="list-divider">
+					<a href="#" class="pickup">
+					<span id='username_<%= c.state.id %>'><%= c.state.user_name %></span>@
+					<span id='screen_name_<%= c.state.id %>'><%= c.state.screen_name %></span></a></th>
+				</li>
+				<li><img border="0" src="<%= c.state.image %>" width="50" height="50">
+					<span id='text_<%= c.state.id %>'><%= c.state.text %></span></li>
+			</ul>
+		<% end -%>
+		</div>
+		<div id="run_exe">
+		</div>
+		<input type="hidden" id="category_id" value="<%=	@category.id	%>">
+		<input type="hidden" id="category_name" value="<%=	@category.name	%>">
 		<div data-role="navbar" data-iconpos="left" >
 			<ul>
 	 			<li><%= link_to @category.name+"に"+t("category.output")+"を作成", "/categories/new/"+@category.id.to_s %></li>
-	 			<li><a >タイムラインを取得</a></li>
+	 			<li><a href="#" onclick="twitterAccess.showTimeLine()">タイムラインを取得</a>
 			</ul>
 		</div>
+	
 	</div>
 	<%= render 'shared/footer' %>
 </div>

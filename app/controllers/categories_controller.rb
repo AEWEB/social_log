@@ -32,6 +32,9 @@ class CategoriesController < ApplicationController
     if @category.save
       if @parentCategory.id==-1
         index
+      else
+        params[:category_id]=@category.category_id
+        init
       end
     else
       render :action => "new"
@@ -39,11 +42,13 @@ class CategoriesController < ApplicationController
   end
   def init
     @categories = Category.find(:all,:conditions => ["user_id = ? and category_id=?",  current_user.id,params[:category_id]])
+    @stateList=Sodatabase.find(:all,:include => [:state],:conditions =>  ["user_id = ? and category_id=?",  current_user.id,params[:category_id]])
     show(params[:category_id])
   end
   def index
     if current_user
       @categories = Category.find(:all,:conditions => ["user_id = ? and category_id is ?",  current_user.id, nil])
+      @stateList=Sodatabase.find(:all,:include => [:state],:conditions => ["user_id = ? and category_id is ?",current_user.id, nil])
       show(-1)
     end
   end

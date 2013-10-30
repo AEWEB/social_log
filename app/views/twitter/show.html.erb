@@ -1,0 +1,16 @@
+<%  @list.each do |twitter| 
+$id=twitter.id
+-%>
+<ul data-role="listview" onclick="twitterAccess.add('<%= twitter.id %>',<%= twitter.user.id %>,'<%= twitter.profile_image_url %>','<%= twitter.created_at %>')" data-inset="true" style="cursor: pointer;">
+	<li data-role="list-divider">
+		<a href="#" class="pickup">
+		<span id='username_<%= twitter.id %>'><%= twitter.user.name %></span>@
+		<span id='screen_name_<%= twitter.id %>'><%= twitter.user.screen_name %></span></a></th>
+	</li>
+	<li><img border="0" src="<%= twitter.profile_image_url %>" width="50" height="50">
+		<span id='text_<%= twitter.id %>'><%= twitter.text %></span></li>
+	</ul>
+<% end -%>
+<div>
+	<a href="#" id="nextButton" data-role="button" onclick="twitterAccess.showTimeLineNext(<%= $id %>)">次へ</a>
+</div>

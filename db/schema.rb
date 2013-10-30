@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923123640) do
+ActiveRecord::Schema.define(:version => 20131024143616) do
 
   create_table "categories", :force => true do |t|
     t.string  "name",        :null => false
@@ -33,12 +33,26 @@ ActiveRecord::Schema.define(:version => 20130923123640) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "so_categories", :force => true do |t|
-    t.string  "so_name",        :null => false
-    t.integer "so_category_id"
+  create_table "sodatabases", :force => true do |t|
+    t.integer "category_id"
+    t.integer "user_id",     :null => false
+    t.integer "state_id",    :null => false
   end
 
-  add_index "so_categories", ["so_category_id"], :name => "so_categories_so_category_id_fk"
+  add_index "sodatabases", ["category_id"], :name => "sodatabases_category_id_fk"
+  add_index "sodatabases", ["state_id"], :name => "sodatabases_state_id_fk"
+  add_index "sodatabases", ["user_id"], :name => "sodatabases_user_id_fk"
+
+  create_table "states", :force => true do |t|
+    t.string   "status",      :null => false
+    t.integer  "career",      :null => false
+    t.string   "user_id",     :null => false
+    t.string   "user_name",   :null => false
+    t.string   "screen_name", :null => false
+    t.text     "text",        :null => false
+    t.string   "image",       :null => false
+    t.datetime "date",        :null => false
+  end
 
   create_table "titles", :force => true do |t|
     t.string   "name"
@@ -62,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20130923123640) do
   add_foreign_key "categories", "categories", name: "categories_category_id_fk", dependent: :delete
   add_foreign_key "categories", "users", name: "categories_user_id_fk", dependent: :delete
 
-  add_foreign_key "so_categories", "so_categories", name: "so_categories_so_category_id_fk", dependent: :delete
+  add_foreign_key "sodatabases", "categories", name: "sodatabases_category_id_fk", dependent: :delete
+  add_foreign_key "sodatabases", "states", name: "sodatabases_state_id_fk", dependent: :delete
+  add_foreign_key "sodatabases", "users", name: "sodatabases_user_id_fk", dependent: :delete
 
 end

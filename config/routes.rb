@@ -11,6 +11,9 @@ SocialLog::Application.routes.draw do
   post "categories/create"
   get "categories/index"
   match "/categories/init/:category_id" => "Categories#init"
+  match "/categories/init/" => "Categories#index"
+  match "/twitter/show/" => "Twitter#show"
+  match "/twitter/add/" => "Twitter#add"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
